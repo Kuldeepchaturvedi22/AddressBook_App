@@ -1,6 +1,8 @@
 package com.spring_address_book_app_development.controller;
 
-import org.springframework.http.HttpStatus;
+import com.spring_address_book_app_development.dto.AddressBookDTO;
+import com.spring_address_book_app_development.service.AddressBookService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -8,28 +10,31 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/address")
 public class AddressBookController {
 
+    @Autowired
+    private AddressBookService addressBookService;
+
     @GetMapping("/get")
     public ResponseEntity<String> getAddressBook() {
-        return new ResponseEntity<> ("addressBook", HttpStatus.OK);
+        return addressBookService.getAddressBook();
     }
 
     @GetMapping("/get/{id}")
     public ResponseEntity<String> getAddressBookById(@PathVariable int id) {
-        return new ResponseEntity<> ("addressBook", HttpStatus.OK);
+        return addressBookService.getAddressBookById(id);
     }
 
     @PostMapping("/post")
-    public ResponseEntity<String> postAddressBook(@RequestBody String address) {
-        return new ResponseEntity<> ("addressBook", HttpStatus.OK);
+    public ResponseEntity<AddressBookDTO> postAddressBook(@RequestBody AddressBookDTO addressBookDTO) {
+        return addressBookService.postAddressBook(addressBookDTO);
     }
 
     @PutMapping("/put/{id}")
     public ResponseEntity<String> putAddressBook(@PathVariable int id) {
-        return new ResponseEntity<> ("addressBook", HttpStatus.OK);
+        return addressBookService.putAddressBook(id);
     }
 
     @DeleteMapping("/delete")
     public ResponseEntity<String> deleteAddressBook() {
-        return new ResponseEntity<> ("addressBook", HttpStatus.OK);
+        return addressBookService.deleteAddressBook();
     }
 }
